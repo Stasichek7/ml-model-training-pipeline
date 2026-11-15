@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools>=68,<81"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ml-model-training-pipeline"
+version = "1.0.0"
+description = "Reproducible classification training, evaluation, and FastAPI inference"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+authors = [{name = "Stasichek7"}]
+dependencies = [
+  "scikit-learn>=1.4,<1.11",
+  "pandas>=2.1,<4",
+  "numpy>=1.26,<3",
+  "matplotlib>=3.8,<4",
+  "joblib>=1.3,<2",
+  "fastapi>=0.110,<1",
+  "uvicorn>=0.27,<1",
+  "pydantic>=2.6,<3",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<10", "ruff>=0.6,<1", "httpx>=0.27,<1"]
+
+[project.scripts]
+ml-pipeline = "ml_pipeline.cli:main"
+
+[project.urls]
+Repository = "https://github.com/Stasichek7/ml-model-training-pipeline"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra --basetemp=.pytest-tmp"
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]

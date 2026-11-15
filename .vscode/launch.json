@@ -1,0 +1,49 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Train ML Models",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "ml_pipeline.cli",
+      "args": ["train"],
+      "python": "${workspaceFolder}/.venv/Scripts/python.exe",
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "Run ML Evaluation",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "ml_pipeline.cli",
+      "args": ["evaluate"],
+      "python": "${workspaceFolder}/.venv/Scripts/python.exe",
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "Start FastAPI Server",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "ml_pipeline.cli",
+      "args": ["serve", "--host", "127.0.0.1", "--port", "8000"],
+      "python": "${workspaceFolder}/.venv/Scripts/python.exe",
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "Run Tests",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "pytest",
+      "args": ["-v"],
+      "python": "${workspaceFolder}/.venv/Scripts/python.exe",
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "justMyCode": false
+    }
+  ]
+}

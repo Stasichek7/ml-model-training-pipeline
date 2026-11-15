@@ -1,0 +1,52 @@
+# Python environment, distributions, and caches
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+coverage.xml
+build/
+dist/
+
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+.aws/
+*.pem
+*.key
+credentials.json
+.codex/
+.agents/
+
+# Generated artifacts: regenerate locally from the documented commands
+models/*
+!models/.gitkeep
+reports/*
+!reports/.gitkeep
+!reports/example_results.json
+
+# Local logs, scratch files, editor/OS state
+*.log
+*.tmp
+*.temp
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+*.code-workspace
+
+# Project-local toolchain and download caches
+.python/
+.cache/
+
+.tools/
+.tmp/
+.pytest-tmp/
+.pytest-reporting-tmp/
+runs/

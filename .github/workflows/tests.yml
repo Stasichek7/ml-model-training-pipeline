@@ -1,0 +1,47 @@
+name: Tests and quality
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: ${{ matrix.os }} / Python ${{ matrix.python }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-latest
+            python: "3.11"
+          - os: ubuntu-latest
+            python: "3.11"
+          - os: ubuntu-latest
+            python: "3.12"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+          cache: pip
+          cache-dependency-path: pyproject.toml
+      - name: Install project and developer dependencies
+        run: python -m pip install -e ".[dev]"
+      - name: Lint
+        run: python -m ruff check .
+      - name: Formatting
+        run: python -m ruff format --check .
+      - name: Tests
+        run: python -m pytest -v
+      - name: Training smoke test
+        run: python -m ml_pipeline.cli train --cv-folds 3 --n-jobs 1
+      - name: Upload evaluation reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: reports-${{ matrix.os }}-${{ matrix.python }}
+          path: reports/
